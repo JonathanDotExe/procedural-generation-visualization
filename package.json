@@ -1,0 +1,22 @@
+{
+  "name": "procedural-generation-visualization",
+  "version": "1.0.0",
+  "description": "A collection of javascript functions and html pages for visualizing procedural generation algorithms and tinkering with them. I will use this repository for testing ideas before implementing them in my minecraft world generator.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JonathanDotExe/procedural-generation-visualization.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/JonathanDotExe/procedural-generation-visualization/issues"
+  },
+  "homepage": "https://github.com/JonathanDotExe/procedural-generation-visualization#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
