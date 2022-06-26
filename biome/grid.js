@@ -1,9 +1,8 @@
 import {VisualizationLayer, VisualizationDrawer} from "../index.js"
-import {seedrandom} from "../node_modules/seedrandom/index.js"
 
 function generateValueBasedSeed (seed, x, y, z) {
     const prime = 31;
-    result = 1;
+    let result = 1;
     result = prime * result + Math.floor(seed ^ (seed >>> 32));
     result = prime * result + x;
     result = prime * result + y;
@@ -42,7 +41,8 @@ class GridBiomeSpreadVisualizationLayer extends VisualizationLayer {
                 color: '#666666'
             }
         ]
-        this.gridSize = 128;
+        this.gridSize = 32;
+        this.cache = {};
     }
 
     init(seed) {
@@ -50,14 +50,18 @@ class GridBiomeSpreadVisualizationLayer extends VisualizationLayer {
     }
 
     getBiomePoint(gridX, gridZ) {
-        random = new seedrandom(generateValueBasedSeed(gridX, 0, gridZ, this.seed));
+        if (this.cache[gridX + "/" + gridZ]) {
+            return this.cache[gridX + "/" + gridZ]
+        }
+        const random = new Math.seedrandom(generateValueBasedSeed(gridX, 0, gridZ, this.seed));
         //Generate point values
-        point = {
+        let point = {
             x: Math.floor((gridX + random()) * this.gridSize),
             z: Math.floor((gridZ + random()) * this.gridSize),
             weight: random() + 0.5,
             biome: this.biomes[Math.floor(random() * this.biomes.length)]
         }
+        this.cache[gridX + "/" + gridZ] = point;
         return point;
     }
 
@@ -74,14 +78,14 @@ class GridBiomeSpreadVisualizationLayer extends VisualizationLayer {
         let biome = null;
         let distance = Number.MAX_VALUE;
         for (const p of [tl, tr, br, bl]) {
-            const d = Math.sqrt(Math.pow(x - p.x, 2) + Math.pow(z - p.z, 2));
+            const d = (Math.pow(x - p.x, 2) + Math.pow(z - p.z, 2));
             const dw = d * p.weight;
             if (dw < distance) {
                 biome = p;
                 distance = dw;
             }
         }
-        return p.biome.color;
+        return biome.biome.color;
     }
 
 }
