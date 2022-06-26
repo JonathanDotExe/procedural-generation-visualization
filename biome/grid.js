@@ -69,6 +69,7 @@ class GridBiomeSpreadVisualizationLayer extends VisualizationLayer {
         //Find biomes
         const gridX = Math.floor(x/this.gridSize)
         const gridZ = Math.floor(z/this.gridSize)
+        console.log(gridX + "/" + gridZ)
 
         const tl = this.getBiomePoint(gridX, gridZ)
         const tr = this.getBiomePoint(gridX + 1, gridZ)

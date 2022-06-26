@@ -22,7 +22,7 @@ export class VisualizationDrawer {
 
     draw(seed, canvas) {
         const ctx = canvas.getContext("2d")
-        const dotSize = 1;
+        const dotSize = 2;
         //Init layers
         for (const layer of this.layers) {
             //Draw
