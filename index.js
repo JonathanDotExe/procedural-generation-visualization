@@ -1,4 +1,4 @@
-class VisualizationLayer {
+export class VisualizationLayer {
 
     constructor() {
         
@@ -14,10 +14,10 @@ class VisualizationLayer {
 
 }
 
-class VizualizationDrawer {
+export class VisualizationDrawer {
 
     constructor() {
-        layers = [];
+        this.layers = [];
     }
 
     draw(seed, canvas) {
