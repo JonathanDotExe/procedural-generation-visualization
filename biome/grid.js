@@ -70,7 +70,18 @@ class GridBiomeSpreadVisualizationLayer extends VisualizationLayer {
         const tr = this.getBiomePoint(gridX + 1, gridZ)
         const bl = this.getBiomePoint(gridX, gridZ + 1)
         const br = this.getBiomePoint(gridX + 1, gridZ + 1)
-        return '#FF0000'
+
+        let biome = null;
+        let distance = Number.MAX_VALUE;
+        for (const p of [tl, tr, br, bl]) {
+            const d = Math.sqrt(Math.pow(x - p.x, 2) + Math.pow(z - p.z, 2));
+            const dw = d * p.weight;
+            if (dw < distance) {
+                biome = p;
+                distance = dw;
+            }
+        }
+        return p.biome.color;
     }
 
 }
